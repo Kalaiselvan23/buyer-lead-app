@@ -239,13 +239,3 @@ The application is ready for deployment on Vercel or any Node.js hosting platfor
 2. Ensure PostgreSQL database is accessible
 3. Run database migrations in production
 4. Deploy with `npm run build`
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-
