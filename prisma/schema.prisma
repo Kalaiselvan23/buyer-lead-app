@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  buyers           Buyer[]
+  buyerHistory     BuyerHistory[]     @relation("BuyerHistoryChangedBy")
+  magicLinkTokens  MagicLinkToken[]
+
+  @@map("users")
+}
+
+model Buyer {
+  id           String      @id @default(cuid())
+  fullName     String
+  email        String?
+  phone        String
+  city         City
+  propertyType PropertyType
+  bhk          BHK?
+  purpose      Purpose
+  budgetMin    Int?
+  budgetMax    Int?
+  timeline     Timeline
+  source       Source
+  status       Status      @default(NEW)
+  notes        String?
+  tags         String[]
+  ownerId      String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  // Relations
+  owner   User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  history BuyerHistory[]
+
+  @@map("buyers")
+}
+
+model BuyerHistory {
+  id        String   @id @default(cuid())
+  buyerId   String
+  changedBy String
+  changedAt DateTime @default(now())
+  diff      Json
+
+  // Relations
+  buyer Buyer @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  user  User  @relation("BuyerHistoryChangedBy", fields: [changedBy], references: [id], onDelete: Cascade)
+
+  @@map("buyer_history")
+}
+
+model MagicLinkToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  email     String
+  userId    String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  used      Boolean  @default(false)
+
+  // Relations
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("magic_link_tokens")
+}
+
+enum City {
+  CHANDIGARH
+  MOHALI
+  ZIRAKPUR
+  PANCHKULA
+  OTHER
+}
+
+enum PropertyType {
+  APARTMENT
+  VILLA
+  PLOT
+  OFFICE
+  RETAIL
+}
+
+enum BHK {
+  ONE
+  TWO
+  THREE
+  FOUR
+  STUDIO
+}
+
+enum Purpose {
+  BUY
+  RENT
+}
+
+enum Timeline {
+  ZERO_TO_THREE_MONTHS
+  THREE_TO_SIX_MONTHS
+  MORE_THAN_SIX_MONTHS
+  EXPLORING
+}
+
+enum Source {
+  WEBSITE
+  REFERRAL
+  WALK_IN
+  CALL
+  OTHER
+}
+
+enum Status {
+  NEW
+  QUALIFIED
+  CONTACTED
+  VISITED
+  NEGOTIATION
+  CONVERTED
+  DROPPED
+}

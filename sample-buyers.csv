@@ -1,0 +1,6 @@
+fullName,email,phone,city,propertyType,bhk,purpose,budgetMin,budgetMax,timeline,source,status,notes,tags
+John Doe,john.doe@example.com,9876543210,CHANDIGARH,APARTMENT,TWO,BUY,5000000,8000000,THREE_TO_SIX_MONTHS,WEBSITE,NEW,Interested in 2BHK apartment,"premium,ready-to-move"
+Jane Smith,jane.smith@example.com,9876543211,MOHALI,VILLA,THREE,BUY,8000000,12000000,ZERO_TO_THREE_MONTHS,REFERRAL,QUALIFIED,Looking for luxury villa,"luxury,villa"
+Mike Johnson,mike.johnson@example.com,9876543212,ZIRAKPUR,PLOT,,BUY,3000000,5000000,MORE_THAN_SIX_MONTHS,WALK_IN,NEW,Interested in plot for investment,"investment,plot"
+Sarah Wilson,sarah.wilson@example.com,9876543213,PANCHKULA,APARTMENT,ONE,RENT,15000,25000,THREE_TO_SIX_MONTHS,CALL,CONTACTED,Looking for 1BHK rental,"rental,1bhk"
+David Brown,david.brown@example.com,9876543214,CHANDIGARH,OFFICE,,BUY,10000000,15000000,EXPLORING,OTHER,QUALIFIED,Commercial property investment,"commercial,office"
